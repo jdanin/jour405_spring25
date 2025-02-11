@@ -5,10 +5,18 @@ title: "Crime Rates"
 Follow along with the demo to learn how to calculate crime rates using R and the Tidyverse. We'll also introduce a new library, janitor, which helps make column names easier to work with. You should get started by loading the tidyverse in a new R block, then install and load janitor.
 
 ### Task 1: Load the tidyverse and install and load janitor
+```{r}
+library(tidyverse)
+install.packages("janitor")
+library(janitor)
+```
 
 
 
 ### Task 2: Load the crime dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_annual_crime.csv
+```{r}
+crimes <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_annual_crime.csv") |> clean_names()
+```
 
 
 
@@ -17,10 +25,18 @@ Follow along with the demo to learn how to calculate crime rates using R and the
 
 
 ### Task 4: Calculate the total crime rate for each year (picking our unit!)
-
+```{r}
+crimes |> mutate(total_rate = grand_total/population * 10000)
+```
+** calculations usually use mutate or summarize
+you want a calculation that ppl can wrap their minds around - ppl like 100s, 10,000
 
 
 ### Task 5: Calculate the violent and property crime rates for each year (same unit)
+```{r}
+crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/population * 10000)
+crimes |> mutate(property_rate = property_crime_total/population * 10000)
+```
 
 
 
@@ -28,7 +44,7 @@ Follow along with the demo to learn how to calculate crime rates using R and the
 
 Write a few sentences about what you found in the data. What years had the highest crime rates? What years had the lowest crime rates? Does the pattern match your expectations?
 
-
+The years with the highest crime rates were primarily in the 1990s, and the years with the lowest rates are the most recent years, the 2010s and 2020s. Based on what I know about history, this pattern does match my expectations. Obviously I did not live through the '90s, but I have heard that that was typically a more violent time, and I have lived through the the most recent years and haven't noticed as much crime (although I'm privileged enough to live in such areas that don't experience much violent crime). I also want to compare it to policy changes throughout history to see if that changed anything.
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
