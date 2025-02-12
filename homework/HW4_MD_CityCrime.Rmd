@@ -9,6 +9,8 @@ In this assignment, we will be working with a dataset of total crimes reported b
 You will need to load the tidyverse library and the janitor library
 
 ```{r}
+library(tidyverse)
+library(janitor)
 ```
 
 Then you'll load the data from the web. The URL for the data is: https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_cities_crime_2019_2020.csv. You will create a dataframe called `md_cities` that contains the data from this URL.
@@ -16,19 +18,21 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 ### Task 2: Load the Data
 
 ```{r}
+md_cities <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_cities_crime_2019_2020.csv")
 ```
 ### Task 3: Calculating Rates
 
 Calculate violent and property crime rates for each city for both years using `mutate()`. You'll create four new columns: `violent_rate_2019`, `property_rate_2019`, `violent_rate_2020`, and `property_rate_2020`. You'll need to figure out the proper unit rate, given that there are varying populations. There's no perfect choice; choose the one that works best for you. Save the results to a new dataframe called `md_cities_rates`.
 
 ```{r}
+md_cities_rates <- md_cities |> mutate(violent_rate_2019 = violent2019/pop2019 * 1000, property_rate_2019 = property2019/pop2019 * 1000, violent_rate_2020 = violent2020/pop2020 * 1000, property_rate_2020 = property2020/pop2020 * 1000)
 ```
 
 ### Task 4: Describe the Rates
 
 Examine the new dataframe, `md_cities_rates`, by clicking on it in the Environment tab in RStudio and sorting by the rate columns. Write a couple of sentences about the results, comparing and contrasting the cities with the highest rates (both violent and property) in 2019 and 2020. Do you see any patterns? What does this tell you about crime in Maryland cities? What's the story here?
 
-ANSWER HERE
+There are over 30 cities that have rates of 0, and then there is a big gap between the highest and second highest violent rates. In 2019, Baltimore has a rate that is 5 times (I don't know if that's the right word to say here) higher than Ocean City, the city with the next highest rate. However, it does seem that the larger or more popular/populated cities have higher rates. Ocean City is more of a tourist town, as opposed to places like Baltimore where people tend to live and work as well as visit. The story here I think could be investigating why Baltimore is so much higher than the rest of the cities in Maryland, and also what makes the over 30 cities with rates of 0 capable of having that rate -- does it have something to do with the urban landscape? The types of people and infrastructure there?
 
 
 ### Task 5: Calculate Percentage Change
@@ -36,19 +40,22 @@ ANSWER HERE
 Let's add two percentage change columns to your dataframe: one for violent crime rates and one for property crime rates. You'll calculate the percentage change between 2019 and 2020 for each city. Save the results to a new dataframe called `md_cities_change`.
 
 ```{r}
+md_cities_change <- md_cities_rates |> mutate(violent_change = (violent_rate_2020 - violent_rate_2019)/violent_rate_2019 * 100, property_change = (property_rate_2020 - property_rate_2019)/property_rate_2019 * 100)
 ```
 
 ### Task 7: Describe Percentage Changes
 
 Look at the `md_cities_change` dataframe by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the percentage change results. What's more interesting here, the patterns or the outliers? What's the story in the data?
 
-ANSWER HERE
+There are a lot of cities with percent changes in the negatives, meaning the rates went down, but there are also a lot of cities with percent changes that exceed 100 (and a few with inconclusive data) -- there's even one city that exceeds a violent rate percent change of 800. Property has more negatives than violent, though, but I don't think that's the most interesting story. I think the outliers have a stronger story to tell about what happens in those cities and maybe how/how frequently those crimes are reported.
 
 ### Task 8: Tell the Best Story
 
 Write up a lede and nutgraf of a story with the _best_ story idea you've found in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
-ANSWER HERE
+Edmonston is among a number of cities in Prince George's County that experienced an increase in violent and property crimes reported between 2019 and 2020.
+
+Data collected of the number of violent and property-related crimes in every city in Maryland compared to the cities' population showed that while many cities saw a decrease in crime, there were plenty of cities that saw the opposite. Many of these cities are in Prince George's County. It is important to note, though, that Prince George's County has the second largest population compared to other counties in the state. With more people, crimes tend to occur more, and people tend to report them more often.
 
 ### Task 9: Save Your Work and Put it on GitHub
 
