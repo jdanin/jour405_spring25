@@ -60,3 +60,28 @@ Data collected of the number of violent and property-related crimes in every cit
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+
+### Task 10: HW 5
+
+Your task will be to take the violent crime rates for 2020 and do three things:
+
+Using the 2020 violent crime rate, calculate the percentiles using `ntile()`. 
+Save the results to a new dataframe called `md_cities_percentiles`. 
+How many cities are above the 90th percentile?
+Calculate the Interquartile Range of the 2020 violent crime rate using `summarize()` and R's `IQR()` function. The syntax is similar to how `mean()` works.
+Do the results change your best story idea from the previous assignment? Why or why not?
+```{r}
+md_cities_percentiles <- md_cities_change |>  mutate(percentile = ntile(violent_rate_2020, 100))
+```
+
+There are 11 cities above the 90th percentile (including the one that is at the 90th).
+
+IQR
+```{r}
+md_cities_percentiles |> 
+  group_by(violent_rate_2020) |> 
+  summarize(percentile = IQR(violent_rate_2020))
+```
+
+I'm not sure if I did the IQR section correct, but even the percentiles alone make me rethink my story idea, or at least the phrasing of it. With only 11 cities out of 137 total cities at or above the 90th percentile, it sounds like cities are safer than they might be in reality, which depending on how you want to frame the article, might be beneficial or detrimental to your audience. Regardless, it could end up being misleading depening on your phrasing, either leading people to have a false sense of safety in their communities.
