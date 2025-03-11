@@ -1,0 +1,51 @@
+---
+title: "midtermpractice"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+scatterplot
+```{r}
+gdp_djia_prac <-read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/gdp_djia.csv")
+```
+correlation
+```{r}
+gdp_djia |> summarize(correlation = cor(GDP, DJIA, method="pearson"))
+```
+scatterplot making
+```{r}
+gdp_djia |> 
+  ggplot() +
+  geom_point(aes(x=GDP, y=DJIA)) +
+  geom_smooth(aes(x=GDP, y=DJIA), method="lm") +
+  labs(title = "DJIA vs. GDP")
+```
+when adding title, you don't need to set x and y again
+
+```{r}
+gdp_djia_prac |> summarize(mean = mean(GDP), sd = sd(GDP))
+```
+```{r}
+gdp_djia_prac |> summarize(mean = mean(DJIA), sd = sd(DJIA))
+```
+```{r}
+sample_100 <- gdp_djia_prac |> 
+  sample_n(100)
+
+sample_50 <- gdp_djia_prac |> 
+  sample_n(50)
+
+sample_10 <- gdp_djia_prac |> 
+  sample_n(10)
+```
+
+
+### Task 4: Calculate the mean age and standard deviation of the sample
+```{r}
+sample_100 |> summarize(mean = mean(gdp_djia_prac), sd = sd(gdp_djia_prac))
+sample_50 |> summarize(mean = mean(gdp_djia_prac), sd = sd(gdp_djia_prac))
+sample_10 |> summarize(mean = mean(gdp_djia_prac), sd = sd(gdp_djia_prac))
+
