@@ -136,7 +136,7 @@ MD_carthefts_total <- MD_carthefts_2023rate |> mutate(total = sum(`2023`))
 
 MD_carthefts_pct <- MD_carthefts_total |> mutate(pct = `2023`/total * 100)
 ```
-The total is 23,871 statewide. 
+The total is 23,871 statewide (see middle and last dataframe). 
 
 The counties with rates above the median: Anne Arundel (4.5% of total), Baltimore City (29.9%), Baltimore County (10%), Cecil (0.62%), Charles (1.2%), Dorchester (0.39%), Howard (2.9%), Montgomery (9.7%), Prince George's (35%), St. Mary's (0.43%), Washington (1.1%), Wicomico (0.44%)
 
