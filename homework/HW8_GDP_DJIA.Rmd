@@ -40,7 +40,8 @@ Use the `ggplot()` function to create a scatterplot of the DJIA and GDP. Be sure
 gdp_djia |> 
   ggplot() +
   geom_point(aes(x=GDP, y=DJIA)) +
-  geom_smooth(aes(x=GDP, y=DJIA), method="lm")
+  geom_smooth(aes(x=GDP, y=DJIA), method="lm") 
+
 ```
 * I know I did not add a title, I wasn't sure how to do it without messing up the entire chart.
 
