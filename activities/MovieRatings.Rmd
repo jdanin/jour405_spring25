@@ -129,6 +129,6 @@ Compare the chi-square statistic to the critical value, say whether you would ac
 
     The chi-square number is larger than the critical value, though only by a little bit. This means that the null hypothesis should be rejected. The observed results are all within 10 to 15 of the expected results, though proportionally the shifts in the expected vs. observed are pretty significant. In a possible story about this, it's valid to write that there is a significant difference between observed and expected, though the chi-square doesn't really tell us why. That may be up to the reporter to keep digging to figure that out.
     
-*chi-square doesn't tell us why
+*chi-square doesn't tell us why, but can use it to test different scenarios
 
 It is important to note that the chi-square test only determines if there is a significant difference between the observed and expected frequencies, but it does not provide information about the specific reasons for this difference. Further analysis and investigation would be required to understand the underlying factors contributing to the observed movie rating distribution.
