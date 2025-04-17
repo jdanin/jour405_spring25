@@ -1,0 +1,15 @@
+---
+title: "final_project_Daninhirsch"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+install.packages("janitor")
+library(janitor)
+```
+```{r}
+final_project <- read_csv("dataset.csv")
+```
+
+The data in this dataset contains a wide variety of songs and their danceability score as determined by a wide variety of factors, and it also includes descriptors of the data, such as genre and whether or not the song is explicit. Most every other descriptor, though has a numerical value associated with it. The columns that I believe will be my most valuable to my analysis are danceability, energy, loudness, and genre, as I believe those columns would likely describe the danceability of songs the best. I'm not sure what information is missing; they have a popularity score, which is helpful for ranking the songs. Maybe I might need an individual rating on them, possibly from individual users. Some questions that I have include, where should I go from here? What exactly do I want to learn from this dataset, and what makes it newsworthy? I'm sure I can come up with something the deeper I look into this dataset, but I think getting started is the hardest part.
