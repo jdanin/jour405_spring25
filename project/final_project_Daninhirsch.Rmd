@@ -3,6 +3,20 @@ title: "final_project_Daninhirsch"
 output: html_document
 ---
 
+
+POSSIBLE TESTS:
+I think linear regression tests (and z-score tests) would be useful for this data set because it could show the relationships between different variables that make songs unique and how those songs are rated in the danceability category. It could help predict which variables are most likely indicators of high danceability.
+
+Plotting this data would also be important to visualize those scores. Making a scatterplot or a histogram would likely be the most helpful.
+
+I think weighting will also be a useful test because some factors might be more important to the danceability score than others, so it's important to account for that.
+
+I'm not sure how exactly this could be helpful, but maybe some tests showing the margin of error (of what specifically, I'm not sure) could be useful.
+
+When I get more into the specifics (maybe with a smaller sample of songs), I think a p-value test could be helpful to see if certain categories/attributions are more statistically significant than others in affecting the danceability score. Additionally, running a correlation test could be useful to see if specific attributes correlate to a higher score.
+
+
+
 ```{r}
 library(tidyverse)
 install.packages("janitor")
