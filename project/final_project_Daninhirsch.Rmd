@@ -27,3 +27,58 @@ final_project <- read_csv("dataset.csv")
 ```
 
 The data in this dataset contains a wide variety of songs and their danceability score as determined by a wide variety of factors, and it also includes descriptors of the data, such as genre and whether or not the song is explicit. Most every other descriptor, though has a numerical value associated with it. The columns that I believe will be my most valuable to my analysis are danceability, energy, loudness, and genre, as I believe those columns would likely describe the danceability of songs the best. I'm not sure what information is missing; they have a popularity score, which is helpful for ranking the songs. Maybe I might need an individual rating on them, possibly from individual users. Some questions that I have include, where should I go from here? What exactly do I want to learn from this dataset, and what makes it newsworthy? I'm sure I can come up with something the deeper I look into this dataset, but I think getting started is the hardest part.
+
+
+
+TRIALS, ERRORS, AND LESSONS
+*Note: I'm rushing through this slightly just because I don't have much time to work on it before it's due, but I can add more next week.*
+
+Means and Standard Deviations:
+```{r}
+final_project |> summarize(mean_danceability = mean(danceability), sd_energy = sd(danceability))
+final_project |> summarize(mean_energy = mean(energy), sd_energy = sd(energy))
+
+
+```
+
+
+
+Z-scores: https://www.r-bloggers.com/2024/06/calculating-z-scores-in-r-a-step-by-step-guide/ 
+```{r}
+final_project <- danceability |>
+  mutate(
+    mean_danceability = mean(danceability),
+    sd_danceability = sd(danceability),
+    z_score = (danceability - mean_danceability) / sd_danceability
+  )
+```
+I'm struggling to figure out how to do the z-score calculation, even though we just did it last week... I took this format from the BaltCounty911Calls activity. I think the error might be that I didn't put the 'mean_danceability' as a new column on the dataframe?
+
+Linear regression: 
+```{r}
+final_project |>
+  ggplot(aes(x = `danceability`, y = `energy`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "danceability", y = "energy", title = "Scatterplot of Danceability vs. Energy scores")
+```
+ok... clearly I need a smaller sample. How should I go about doing that without having to do it by hand? Also, would simple regression even be a useful test? The line doesn't really show that strong of a relationship.
+
+```{r}
+model <- lm(`energy` ~ `danceability`, data = final_project)
+
+summary(model)
+```
+This is good info to have, especially the p-value and median, because those can be used to spot statistical signiicance and a general idea of where scores tend to lie based on different criteria.
+
+I think multiple regression would be a good test to run because there are multiple factors that I want to investigate, but we haven't done a lot of that yet.
+a resource I found: https://www.youtube.com/watch?v=mno47Jn4gaU 
+
+```{r}
+model <- lm(`danceability` ~ `liveliness` + `energy`, data = final_project)
+
+summary(model)
+```
+(that was a guess for how to do multiple regression based on that video; it didn't work, but I'm not sure how to differentiate it from the first test I ran for the simple regression)
+
+Would correlation be a good test to run too?
