@@ -75,7 +75,7 @@ I think multiple regression would be a good test to run because there are multip
 a resource I found: https://www.youtube.com/watch?v=mno47Jn4gaU 
 
 ```{r}
-model <- lm(`danceability` ~ `liveliness` + `energy`, data = final_project)
+model <- lm(danceability ~ instrumentalness + energy, data = final_project)
 
 summary(model)
 ```
